@@ -19,11 +19,11 @@ The core of this project involves integrating ultrasonic sensors with a microcon
 - USART: Exposes information useful for debugging through USART.
 
 ### **Block Diagram**
-- TBD
+- https://ibb.co/album/9hzbxS
 
 ## **Hardware Design**
 
-### **Components**  
+### **Bill of Materials**  
 | Component                  | Quantity | Description                                   |
 |----------------------------|:--------:|-----------------------------------------------|
 | Arduino Uno                |    1     | Microcontroller for managing system state     |
@@ -37,7 +37,7 @@ The core of this project involves integrating ultrasonic sensors with a microcon
 | Cable USB-A - USB-B        |    1     | Power, developing, debugging                  |
 
 ### Diagrams
-- TBD
+- https://ibb.co/album/9hzbxS
 
 ## **Software Design**  
 - **IDE**: Visual Studio Code, PlatformIO
@@ -52,13 +52,17 @@ The core of this project involves integrating ultrasonic sensors with a microcon
  5. Data Logging: Expose sensor data for analysis through USART for debugging purposes.
 
 ## **Setup**  
-- TBD
+- https://ibb.co/album/9hzbxS
 
 ## **Conclusions**
 
 ## **Resources**  
 ### **Hardware Resources**  
 - Arduino Uno Datasheet: [https://www.arduino.cc/en/main/arduinoBoardUno](https://www.arduino.cc/en/main/arduinoBoardUno)
+- HC-SR04 Ultrasonic Sensor Datasheet: [https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf](https://cdn.sparkfun.com/datasheets/Sensors/Proximity/HCSR04.pdf)
+- LCD-016N002B-CFH-ET LCD Display Datasheet: [https://www.vishay.com/docs/37484/lcd016n002bcfhet.pdf](https://www.vishay.com/docs/37484/lcd016n002bcfhet.pdf)
+- Active Passive Buzzer: [https://components101.com/misc/buzzer-pinout-working-datasheet](https://components101.com/misc/buzzer-pinout-working-datasheet)
 
 ### **Software Resources**  
 - PlatformIO: [https://platformio.org](https://platformio.org)  
+- Visual Studio Code: [https://code.visualstudio.com/](https://code.visualstudio.com/)  
