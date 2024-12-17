@@ -13,7 +13,7 @@ The core of this project involves integrating ultrasonic sensors with a microcon
 ### **Features**
 - Obstacle Detection: Uses ultrasonic sensors to detect obstacles within a defined range.
 - Distance Measurement: Provides accurate real-time distance readings to nearby objects.
-- Visual Alerts: Displays distance information and proximity warnings through LEDs or an LCD display.
+- Visual Alerts: Displays distance information and proximity warnings through LCD display.
 - Audio Feedback: Emits beeping sounds that increase in frequency as the vehicle approaches an obstacle.
 - Multi-Sensor Integration: Supports multiple ultrasonic sensors for comprehensive environmental coverage.
 - USART: Exposes information useful for debugging through USART.
@@ -28,24 +28,25 @@ The core of this project involves integrating ultrasonic sensors with a microcon
 |----------------------------|:--------:|-----------------------------------------------|
 | Arduino Uno                |    1     | Microcontroller for managing system state     |
 | LCD Display                |    1     | Display information like measured distances   |
-| Red LEDs                   |    2     | Indicates distance through blinking frequency |
+| Potentiometer 10 K         |    1     | Controls the contrast of LCD                  |
 | Speaker                    |    1     | Indicates distance through beeps frequency    |
-| Resistors (various)        |   TBD    | For components                                |
+| Pushbutton                 |    1     | Toggle metric - imperial distance on LCD      |
+| Resistors (220 K)          |    2     | For components                                |
 | Breadboard & Wires         |    1     | For circuit                                   |
-| Cable USB-A - USB-B        |    1     | Power, developing, debugging                  |
 | HC-SR04 Ultrasonic Sensor  |    2     | Measure distances                             |
+| Cable USB-A - USB-B        |    1     | Power, developing, debugging                  |
 
 ### Diagrams
 - TBD
 
 ## **Software Design**  
 - **IDE**: Visual Studio Code, PlatformIO
-- **Libraries**: TBD
+- **Libraries**: Arduino, LiquidCrystal
 - **Planned Functionalities**:
  1. Real-Time Obstacle Detection: Continuously monitor the surroundings using ultrasonic sensors to detect obstacles within a specified range.
  2. Accurate Distance Calculation: Measure and display the precise distance to nearby objects, updating in real-time.
  3. Proximity Alerts:
- - Visual Feedback: LED indicators or an LCD display to show distance and proximity levels.
+ - Visual Feedback: LCD display to show distance and proximity levels.
  - Audio Alerts: Emit beeps or tones that increase in frequency as the vehicle approaches an obstacle.
  4. Multi-Sensor Data Fusion: Integrate data from multiple ultrasonic sensors to cover a broader detection area, ensuring comprehensive monitoring.
  5. Data Logging: Expose sensor data for analysis through USART for debugging purposes.
