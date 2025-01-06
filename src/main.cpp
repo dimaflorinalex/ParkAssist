@@ -57,7 +57,7 @@ const unsigned long alarmSpeakerDebounceMilliseconds[4] = { UINT32_MAX, 450, 300
 const unsigned long alarmDistanceMillimeters[4] = { UINT32_MAX, 400, 250, 100 };
 const unsigned long alarmLedValues[4] = { 0, 127, 127, 255 };
 
-// Handle button interrupt
+// Handles button interrupt
 void handleButtonInterrupt() {
  	int buttonValue = digitalRead(buttonPin);
   
@@ -73,7 +73,7 @@ void handleButtonInterrupt() {
   }
 }
 
-// Handle button
+// Handles button
 void handleButton() {
   shouldHandleButton = false;
   
@@ -84,7 +84,7 @@ void handleButton() {
   Serial.println(buffer);
 }
 
-// Read value from ultrasonic sensor
+// Reads value from ultrasonic sensor
 void readSensor(Sensor sensor)
 {
   digitalWrite(sensorTrigPins[sensor], LOW);
@@ -96,7 +96,7 @@ void readSensor(Sensor sensor)
   digitalWrite(sensorTrigPins[sensor], LOW);
 
   sensorPulseDurations[sensor] = pulseIn(sensorEchoPins[sensor], HIGH);
-  sensorDistanceMillimeters[sensor] = sensorPulseDurations[sensor] * 340/2/1000; // distance = speed of sound * time ; conversion to millimeters
+  sensorDistanceMillimeters[sensor] = sensorPulseDurations[sensor] * 340/2/1000; // Distance = Time * Speed of sound (340m/s). Conversion to millimeters
 
   if (sensorDistanceMillimeters[sensor] == 0) {
     sensorDistanceMillimeters[sensor] = UINT32_MAX;
@@ -109,13 +109,14 @@ void readSensor(Sensor sensor)
   #endif
 }
 
-// Read values from all ultrasonic sensors
+// Reads values from all ultrasonic sensors
 void readSensors() {
   for (int i = Sensor::FRONT; i <= Sensor::BACK; i++) {
     readSensor((Sensor)i);
   }
 }
 
+// Updates distances on LCD
 void updateDistancesLCD() {
   unsigned long currentMilliseconds = millis();
 
@@ -145,6 +146,7 @@ void updateDistancesLCD() {
   }
 }
 
+// Computes alarm level by interpreting sensor values
 void interpretSensors() {
   unsigned long minSensorDistanceMillimeters = UINT32_MAX;
 
@@ -164,7 +166,7 @@ void interpretSensors() {
   alarm = Alarm::NONE;
 }
 
-// Handle alarm
+// Handles alarm
 void handleAlarm() {
   #ifdef DEBUG
   char buffer[128] = "";
@@ -174,12 +176,14 @@ void handleAlarm() {
 
   unsigned long currentMilliseconds = millis();
 
+  // LED control
   if (currentMilliseconds - ledLastUpdatedMilliseconds >= ledDebounceMilliseconds) {
     ledLastUpdatedMilliseconds = currentMilliseconds;
 
     analogWrite(ledPin, alarmLedValues[alarm]);
   }
 
+  // Speaker control
   if (alarm != Alarm::NONE) {
     if (speakerToneEnabled) {
       if (currentMilliseconds - speakerLastToneMilliseconds >= alarmSpeakerDebounceMilliseconds[alarm]) {
@@ -191,8 +195,9 @@ void handleAlarm() {
   }
 }
 
+// Initializes system
 void setup() {
-  Serial.begin(serialBaudRate);
+  Serial.begin(serialBaudRate); // Initialize serial port
   
   #ifdef DEBUG
   char buffer[128] = "";
@@ -200,25 +205,29 @@ void setup() {
   Serial.println(buffer);
   #endif
   
+  // Initialize LCD
   lcd.begin(lcdColumns, lcdRows);
   lcd.print("Park Assist");
   lcd.setCursor(0, 1);
   lcd.print("Initializing...");
   lcdLastUpdatedMilliseconds = millis();
   
+  // Initialize button
   pinMode(buttonPin, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(buttonPin), handleButtonInterrupt, CHANGE);
   
-  pinMode(speakerPin, OUTPUT);
+  pinMode(speakerPin, OUTPUT); // Initialize Speaker
   
-  pinMode(ledPin, OUTPUT);
+  pinMode(ledPin, OUTPUT); // Initialize LED
 
+  // Initialize sensors
   for (int i = Sensor::FRONT; i <= Sensor::BACK; i++) {
   	pinMode(sensorTrigPins[i], OUTPUT);
     pinMode(sensorEchoPins[i], INPUT);
   }
 }
 
+// Main working loop
 void loop() {
   if (shouldHandleButton) {
     handleButton();
