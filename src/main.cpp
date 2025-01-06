@@ -13,7 +13,7 @@ LiquidCrystal lcd(lcdRsPin, lcdEnPin, lcdD4Pin, lcdD5Pin, lcdD6Pin, lcdD7Pin);
 const uint8_t lcdColumns = 16, lcdRows = 2;
 const unsigned long lcdDebounceMilliseconds = 500;
 unsigned long lcdLastUpdatedMilliseconds = 0;
-const unsigned long lcdMaxSensorDistanceMillimeters = 800;
+const unsigned long lcdMaxSensorDistanceMillimeters = 700;
 
 // Sensors (HC-SR04 Ultrasonic Sensors)
 enum Sensor {
